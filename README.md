@@ -1,1 +1,2 @@
-# ucsd-seminar
+# osu-seminar
+Materials for OSU Job Talk
