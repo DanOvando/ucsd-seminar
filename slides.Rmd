@@ -1,7 +1,7 @@
 ---
 title: "Forecasting and Managing <br> Social-Ecological Systems"
 author: "Dan Ovando"
-institute: "UC San Diego HDSI/SIO Research Seminar"
+institute: "UC San Diego SIO/HDSI Research Seminar"
 date: "2022/06/16"
 output:
   xaringan::moon_reader:
@@ -83,7 +83,7 @@ Using ...
 
 ???
 
-
+haw-li-ji-oh-loo
 
 ---
 
@@ -128,7 +128,7 @@ Society increasingly asking for the *what will*
 
 ].pull-right[
 
-![:scale 70%](imgs/r2.png)
+![:scale 70%](imgs/r22.png)
 
 [Møller & Jennions (2002)](https://www.jstor.org/stable/4223368)
 ]
@@ -161,7 +161,7 @@ class: center, middle, inverse
 # Let's Talk About Salmon
 
 .center[
-<video width="600" height="500" controls loop>
+<video width="600" height="500" autoplay controls loop>
   <source src="imgs/salmon.mp4" type="video/mp4">
 </video> 
 ]
