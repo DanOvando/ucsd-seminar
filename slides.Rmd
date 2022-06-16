@@ -1,7 +1,7 @@
 ---
 title: "Forecasting and Managing <br> Social-Ecological Systems"
 author: "Dan Ovando"
-institute: "UC San Diego Research Seminar"
+institute: "UC San Diego HDSI/SIO Research Seminar"
 date: "2022/06/16"
 output:
   xaringan::moon_reader:
@@ -75,17 +75,13 @@ Using ...
   - Bayesian methods
  
   - Econometrics
+  
+  - Simulation modeling
  
   - Open and reproducible data science
-  
 
 
 ???
-
-.center[**An Optimistic Skeptic**]
-
-
-What do I mean by an optimistic skeptic? Social-ecological systems are complicated. This both complicates our ability to clearly understand what is happening in them, and to identify simple solutions to complex problems. Hence, "skeptic": my prior is that uncertainty and complexity are the norm. Optimist though: I believe that science can help us navigate this uncertainty and complexity in a productive way, to help us move slowly towards better understanding and better outcomes. 
 
 
 
@@ -110,20 +106,12 @@ class: center, middle, inverse
 ---
 
 class: center, middle, inverse
-# Forecasting Salmon Dynamics
+# Forecasting Salmon
 
 ---
 
-class: center, middle, inverse
 
-> Counting fish is just like counting trees, <br> except they move and are invisible
-> `r tufte::quote_footer('---  John Shepherd (loosely)')`
 
----
-to do
-
-- tie the two cultures back together a bit more
-- Turning to the "why"
 # Predictive Modeling in Ecology
 
 .pull-left[
@@ -136,8 +124,6 @@ Ecology has historically focused on the *why*
 
 Society increasingly asking for the *what will*
 
-.center[**Can new data and methods improve forecasting in social-ecological systems?**]
-
 
 
 ].pull-right[
@@ -147,6 +133,19 @@ Society increasingly asking for the *what will*
 [Møller & Jennions (2002)](https://www.jstor.org/stable/4223368)
 ]
 
+???
+data-generating vs. algorithmic approaches
+
+part of low main effect is precise estimation of small but important effects
+
+I would argue that a lot though is also a focus on understandable models over predictive models that vastly oversimplify complex systems. 
+
+Important to note if our policy-informing model only explains a small fraction of past variance
+
+---
+
+class: center, middle, inverse
+# Can non-parametric approaches improve salmon forecasts?
 
 ---
 
@@ -162,7 +161,7 @@ Society increasingly asking for the *what will*
 # Let's Talk About Salmon
 
 .center[
-<video width="600" height="500" autoplay controls loop>
+<video width="600" height="500" controls loop>
   <source src="imgs/salmon.mp4" type="video/mp4">
 </video> 
 ]
@@ -201,46 +200,12 @@ They are also a useful case study in **predictive modeling**
 
 ---
 
-# Historic Forecast Strategies
-
-.pull-left[
-
-- Fisheries Research Institute has provided forecasts since at least 1967
-
-- Primary method has been **sibling regression**
-  - Predict returns of cohort *this year* by trends in cohort in *previous years*
-  
-
-- Challenges
-  - What about the youngest age classes?
-  - What if maturation schedule changes?
-
-
-
-].pull-right[
-
-![](imgs/fri.jpeg)
-
-]
-
-
----
-
-class: center, middle, inverse
-#  
-
-## How much can we improve pre-season forecasts of sockeye salmon?
-
-
-
----
-
-
 # Parametric vs. Non-Parametric Models
 
 .pull-left[
 Historic FRI forecasts have focused on **parametric** models
   - Researchers determine functional forms, model assigns coefficients
+  - Sibling regression in this case
 
 
 **Non-parametric** models flip the problem
@@ -258,64 +223,65 @@ Historic FRI forecasts have focused on **parametric** models
 # Why Non-Parametric Models?
 
 
-Parametric models can be limited by our imaginations (and patience)
-  - Can result in model misspecification
-
 Non-parametric models reduce chance of **predictive model misspecification**
+  
   - If there's a good model to be found, they will find it
 
-Allows us to explore
+
+Non-parametric models can help us explore
+
   - Non-linearities
+  
   - Dynamic responses
+  
   - Environmental correlations
 
+That we might otherwise miss
 
 ---
 
 # Models Explored
 
-
 Random Forests (`ranger`)
   * Ensemble of *independent* regression trees
-
---
 
 Boosted regression trees (`XGBoost`)
   * Ensemble of regression trees *that build on each other*
 
---
 
-Recurrent neural networks (`tensorflow`)
+Recurrent neural networks (`tensorflow`)<sup>*</sup>
   * A neural network *with memory*
 
---
 
 Dynamic Linear Models (`MARSS`)
   * A hybrid linear regression with non-parametric dynamics
 
---
 
 Empirical Dynamic Modeling (`rEDM`)
   * Predictions based on lags, predicated on Takens' theorem
-
---
-
-The Might Lag(1)
-  * Returns this year = returns last year
 
 ---
 
 # Example Model
 
-Predict returns of age group $a$ to river system *s* as a function of...
+Predict returns of age group $a$ to river system $s$ in year $y$ as a function of...
+  
   - Historic cohort returns across all systems
+
   - Historic **non-cohort** returns across all systems
+
   - Other salmonids (pink, chum)
+
   - At-sea environmental covariates
+    
     - Temperature 
+    
     - Wind
+    
     - PDO
+    
     - Pressure
+
 
 ---
 
@@ -332,9 +298,6 @@ For each model...
 2. Compare performance against lag(1) benchmark
 
 3. Repeat in rolling fashion from 2000 to 2020
-
-4. Construct rolling-ensemble of models over same time period based on historic performance of individual models
-
 
 ].pull-right[
 .center[![:scale 100%](imgs/just_returns_plot.png)]
@@ -375,13 +338,13 @@ don't forget to mention the bottom line
 
 # Predicting Age Groups
 
-.center[![:scale 90%](imgs/age_forecast_figure.png)]
+.center[![:scale 90%](imgs/age_forecast_figure2.png)]
 
 .left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
 
 ---
 
-# Predicting River Systems
+# Management Occurs at the River System Level
 
 .center[![:scale 90%](imgs/system_forecast_figure.png)]
 
@@ -409,7 +372,7 @@ don't forget to mention the bottom line
 
 # Ensemble Model
 
-.center[![:scale 90%](imgs/system_ensemble_forecast_figure.png)]
+.center[![:scale 90%](imgs/system_ensemble_forecast_figure2.png)]
 
 .left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
 
@@ -418,23 +381,27 @@ don't forget to mention the bottom line
 
 # Why Didn't Things Improve More?
 
-.center[![:scale 90%](imgs/yearly_system_resid_struggles_figure.png)]
+.center[![:scale 90%](imgs/yearly_system_resid_struggles_figure2.png)]
 
 .left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
 
 
+???
+Remember, non-parameteric models can help us with model misspecification: they can't squeeze information out of data that just isn't there. 
+
+Our initial motivation for this project was "is there a better model out there". Our answer is, "somewhat, but we really need more and better data"
 ---
 
 # Improving Sockeye Salmon Forecasts
 
 .pull-left[
 
-XX bring back the two cultures
+Can non-parametric models improve sockeye forecasts? Somewhat. 
 
-- Non-parametric models helped some
+- Non-parametric models reduced forecast error some 
+  * ~13% in 5/7 river systems
   * Highlighted value of cross-system and cross-ages correlations
   * 2022 Forecast: Another **70 million** year... 
-
 
 **Strength of signals in data, not quality of model, limits performance**
 
@@ -460,17 +427,17 @@ XX bring back the two cultures
 
 .pull-left[
 
-- Predictive models are a useful addition to the marine science toolbox
-  - Benchmark forecasts
+- Both **why** and **what will** have roles to play in managing social-ecological systems
 
-- How applicable are they for "slow" processes?
+- Benchmark forecasts?
+
+- How can they be applied to "slow" processes?
 
 - Adding people to the equation
 
-
 - **utility** over **accuracy**?
 
-**Exciting opportunities for basic and applied research in social-ecological predictive modeling**
+**There are exciting opportunities for basic and applied research in social-ecological predictive modeling**
 
 ].pull-right[
 
@@ -491,8 +458,6 @@ Turning to the "why"
 ---
 
 
-
-
 # Leaving the Walled Garden
 
 .pull-left[
@@ -503,7 +468,7 @@ Turning to the "why"
   
 - Modern protected areas first seen as refuges from the outside world
   
-- Protection has wider impacts
+- Protection has effects "inside" and "outside"
   
   - "spillover" of adult or larval organisms
   
@@ -703,6 +668,8 @@ $$\mathbf{B^s} \sim N(\beta_r,\sigma_r)$$
 
 - Communities should have a clear understanding of expected effects of protected areas
 
+- What about the social effects?
+
 
 ].pull-right[
 
@@ -726,7 +693,7 @@ class: center, middle, inverse
 
 ---
 
-# Fisheries Assessment & Management
+# Marine Conservation & Fisheries Management
 
 .pull-left[
 
@@ -737,13 +704,11 @@ Fisheries research is critical to conservation and human well-being
   
   - Modern monitoring tools
 
-  - Supporting California fisheries
+  - Reducing fisheries bycatch
+
+  - Supporting fisheries management in California & beyond
   
-    - Climate-resilience
-  
-  - Ecosystem Based Management
-    - Models & Policy
-  
+
 ] .pull-right[
 
 ![:scale 80%](imgs/boats_and_surf.JPG)
@@ -751,29 +716,153 @@ Fisheries research is critical to conservation and human well-being
 ]
 
 ???
-Atlantis
 Forage fish
 Coastal fisheries
 
 ---
 
-# Data-Limited Stock Assessment
+#  Environmental Data Science
+.pull-left[
+
+New computational and data resources are opening frontiers in environmental science
+
+### Research at UCSD
+
+- Tools and best practices in environmental data science
+
+- Collaborations bridging **data** and **marine** sciences
+  - CALCOFI
+  - CCE LTER
+  - Regional management bodies
 
 
-![](imgs/scrooge.png)
+].pull-right[
+
+![](imgs/ray.jpg)
+
+]
 
 ???
-Partnership with Global Fishing Watch
+Collaborating with other faculty and institutions to help them make the most of their data
+Atlantis
+
+What we do matters but so does how we do it. 
+
+a pdp-11
+Global weirding in Alaska
+
 ---
 
 
+# Teaching & Mentorship
+
+The opportunity to work with students is one of the primary reasons I hope to join the faculty at UCSD. 
+
+
+### Goals at UCSD
+  
+  - Developing inclusive and complementary quantitative classes
+  
+  - Preparing students for range of careers
+  
+  - Preparing students for the computer and the field
+
+  - Connections with Latin America
+  
+
+
+???
+
+
+  - Creating learning communities around environmental data science
+    - [EcoDataScience](https://eco-data-science.github.io/)
+    
+
+Things are changing. The way we train students need to evolve. Leveraging the opportunity to be a bridge. 
+
+Causal inference in social-ecological systems
+
+Data science for environmental science
+
+Population models to inform decision making
+
+Career development starts before college
+---
+
+# Forecasting & Managing Social-Ecological Systems
+
+.pull-left[
+
+
+Social-ecological problems are **complex**
+
+**Solving** them requires
+  
+  - Open and reproducible science
+  
+  - Interdisciplinary collaboration
+  
+  - Diverse teams
+  
+
+] .pull-right[
+
+.center[![](imgs/IMG_0526.jpg)]
+
+]
+???
+We're one small part of the industry, and we touch a lot of lives: it's critical that 
+
+---
+
+# Questions?
+
+.pull-left[
+
+**slides:** <br>
+
+[danovando.github.io/ucsd-seminar/slides](https://danovando.github.io/ucsd-seminar/slides)
+
+**email:** danovan@uw.edu
+
+**website:** [danovando.com](https://www.weirdfishes.blog/)
+
+**twitter:** [@danovand0](https://twitter.com/DanOvand0)
+
+
+#### Funding & Support
+  
+.small[
+- Salmon: Bristol Bay Regional Seafood Development Association, Bristol Bay Seafood Processors, Douglas and Joyce McCallum
+  
+- Protected Areas: NOAA Sea Grant Population and Ecosystem Dynamics Fellowship, PISCO divers
+]
+
+].pull-right[
+
+.center[![:scale 90%](`r file.path(img_path,"squats.jpg") `)]
+
+
+]
+
+
+---
+
+
+
+
+
+
+class: center, middle, inverse
+# Extras
+
+---
 
 # Reducing Fisheries Bycatch
 
 .pull-left[
 
 Bycatch remains a problem even in otherwise well-managed fisheries
-  - Sharks, turtles, marine mammals
 
 ### Research at UCSD
   - [`marlin`](https://danovando.github.io/marlin/)
@@ -796,6 +885,51 @@ Bycatch remains a problem even in otherwise well-managed fisheries
 
 ---
 
+
+
+
+
+class: center, middle, inverse
+
+> Counting fish is just like counting trees... <br> except they move and are invisible
+> `r tufte::quote_footer('---  John Shepherd (loosely)')`
+
+---
+
+# Funding Strategies
+
+Past Funding
+  - Waitt, Walton, Packard, Pew
+  - NMFS Population and Ecosystem Dynamics Fellowship
+  - Western Pacific Regional Fishery Management Council
+  - Doris Duke Conservation Fellowship
+  
+Current Funding
+  - Food and Agriculture Organization of the United Nations
+  - NOAA Saltonstall-Kennedy Grant 
+  - The Nature Conservancy
+
+
+Future Funding
+  - Support for capacity building and curriculum development
+  - Collaborations with management bodies
+  - Expanding to tech sector for data and computational support
+
+---
+
+# Data-Limited Stock Assessment
+
+
+![](imgs/scrooge.png)
+
+???
+Partnership with Global Fishing Watch
+---
+
+
+
+
+
 #  [`marlin`](https://danovando.github.io/marlin/)
 
 .center[![:scale 90%](`r file.path(img_path,"marlin.jpg")`)]
@@ -803,139 +937,25 @@ Bycatch remains a problem even in otherwise well-managed fisheries
 
 ---
 
-# [`marlin`](https://danovando.github.io/marlin/)
+# Historic Forecast Strategies
 
-.center[![:scale 80%](imgs/marlin2.jpg)]
-
-
----
-
-
-
-#  Environmental Data Science
 .pull-left[
-New computational and data resources are opening frontiers in environmental science
-### Research at UCSD
 
-- Tools and best practices in predictive modeling for environmental problems
-  - Confronting models with reality
+- Fisheries Research Institute has provided forecasts since at least 1967
 
-- Collaborations bridging **data** and **marine** sciences
-  - CALCOFI
-  - CCE LTER
-  - Management bodies
+- Primary method has been parametric  **sibling regression**
+  - Predict returns of cohort *this year* by trends in cohort in *previous years*
+  
+
+- Challenges
+  - What about the youngest age classes?
+  - What if maturation schedule changes?
+
 
 
 ].pull-right[
 
-![](imgs/ray.jpg)
-
-]
-
-???
-What we do matters but so does how we do it. 
-
-a pdp-11
-Global weirding in Alaska
-
----
-
-
-# Teaching & Mentorship
-
-The opportunity to work with students is one of the primary reasons I hope to join the faculty at UCSD. 
-
-
-### Goals at UCSD
-  
-  - Developing inclusive and useful quantitative classes
-  
-  - Creating learning communities around environmental data science
-    - [EcoDataScience](https://eco-data-science.github.io/)
-    
-  - Preparing students for range of careers
-  
-  - Preparing students for the computer and the field
-
-  - Connections with Latin America
-  
-
-
-???
-
-Thigns are changing. The way we train students need to evolve. Leveraging the opporunity to be a bridge. 
-
-Capstone projects
-
-Experience with getting people into a variety of careers
-
-Causal inference in social-ecological systems
-
-Data science for environmental science
-
-Assessing and managing marine populations
-
-Career development starts before college
----
-
-# Philosophy of Healthy Science
-
-.pull-left[
-
-
-Social-ecological problems are **complex**
-
-**Solving** them requires
-  
-  - Open and reproducible science
-  
-  - Interdisciplinary collaboration
-  
-  - Diverse teams
-  
-
-.center[**I'm excited to help support healthy oceans and people as part of UCSD community**]
-
-
-
-] .pull-right[
-
-.center[![](imgs/IMG_0526.jpg)]
-
-]
-???
-We're one small part of the industry, and we touch a lot of lives: it's critical that 
-
----
-
-
-
-# Questions?
-
-.pull-left[
-
-**slides:** <br>
-
-[danovando.github.io/ucsd-seminar/slides](https://danovando.github.io/ucsd-seminar/slides)
-
-**email:** danovan@uw.edu
-
-**website:** [danovando.com](https://www.weirdfishes.blog/)
-
-**twitter:** [@danovand0](https://twitter.com/DanOvand0)
-
-
-#### Funding
-  
-  - Assessment: Food and Agriculture Organization of the United Nations
-  
-  - Protected Areas: NOAA Sea Grant Population and Ecosystem Dynamics Fellowship
-
-
-].pull-right[
-
-.center[![:scale 90%](`r file.path(img_path,"squats.jpg") `)]
-
+![](imgs/fri.jpeg)
 
 ]
 
@@ -945,30 +965,52 @@ We're one small part of the industry, and we touch a lot of lives: it's critical
 
 
 
+# Variable Importance Scores
 
+.center[ ![:scale 80%](imgs/system_varimportance_figure.png)  ]
 
-class: center, middle, inverse
-# Extras
+.left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
+
+---
+
+# Retrospective Bias
+
+.center[ ![:scale 90%](imgs/retrospective_bias_plot.png)  ]
+
+.left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
 
 ---
 
 
-# Code is a Tool. 
+# Forecasting Salmon
+
+Salmon management depends on a variety of forecasts
+
+**Spawner-recruit** models guide management targets
+
+**In-Season** forecasts inform daily fishery decisions
+  - Run timing and volume
+  
+**Pre-Season** forecasts support planning by communities and managers
+
+
+---
+
+# Why So Many Models?
 
 .pull-left[
 
-- Just because we can code it doesn't mean it's right
+- In parametric modeling, we often pick models based on **theory**
+  - GAM vs. GLM vs. GLMER etc. 
 
-- Coding is easy (relatively speaking). 
+- For regression-style problems little inherent reason for one non-parametric method over another
 
-- Ideas are hard
-  - ideas should drive code, not *vice versa*
-  
-- We need to be willing to put our computer games to the test
+- Range of models allows us to explore best performers for different tasks
+  - And ensemble, for better or worse... 
 
 ].pull-right[
 
-.center[![](https://gmedia.playstation.com/is/image/SIEPDC/horizon-forbidden-west-screenshot-01-disclaimer-02oct20?$2400px$)]
+![](imgs/charlie.jpg)
 
 ]
 
@@ -1051,58 +1093,14 @@ class: center, middle, inverse
 
 ---
 
-# Variable Importance Scores
-
-.center[ ![:scale 80%](imgs/system_varimportance_figure.png)  ]
-
-.left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
-
----
-
-# Retrospective Bias
-
-.center[ ![:scale 90%](imgs/retrospective_bias_plot.png)  ]
-
-.left[.small[[Ovando *et al*. (2022)](https://cdnsciencepub.com/doi/10.1139/cjfas-2021-0287)]]
-
----
 
 
-# Forecasting Salmon
 
-Salmon management depends on a variety of forecasts
+# [`marlin`](https://danovando.github.io/marlin/)
 
-**Spawner-recruit** models guide management targets
-
-**In-Season** forecasts inform daily fishery decisions
-  - Run timing and volume
-  
-**Pre-Season** forecasts support planning by communities and managers
+.center[![:scale 80%](imgs/marlin2.jpg)]
 
 
 ---
-
-# Why So Many Models?
-
-.pull-left[
-
-- In parametric modeling, we often pick models based on **theory**
-  - GAM vs. GLM vs. GLMER etc. 
-
-- For regression-style problems little inherent reason for one non-parametric method over another
-
-- Range of models allows us to explore best performers for different tasks
-  - And ensemble, for better or worse... 
-
-].pull-right[
-
-![](imgs/charlie.jpg)
-
-]
-
-
----
-
-
 
 
