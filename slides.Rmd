@@ -116,7 +116,7 @@ class: center, middle, inverse
 
 .pull-left[
 
-[Breiman (2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full) talked about *two cultures*
+[Breiman (2001)](https://projecteuclid.org/journals/statistical-science/volume-16/issue-3/Statistical-Modeling--The-Two-Cultures-with-comments-and-a/10.1214/ss/1009213726.full) talked about *two cultures* in statistical modeling
   - **Why** do things happen?
   - **What will** happen?
 
@@ -396,23 +396,20 @@ Our initial motivation for this project was "is there a better model out there".
 
 .pull-left[
 
-Can non-parametric models improve sockeye forecasts? Somewhat. 
+Can non-parametric models improve sockeye forecasts? Somewhat.
 
 - Non-parametric models reduced forecast error some 
   * ~13% in 5/7 river systems
-  * Highlighted value of cross-system and cross-ages correlations
+  * Revealed importance of cross-system correlations
   * 2022 Forecast: Another **70 million** year... 
 
-**Strength of signals in data, not quality of model, limits performance**
-
+- Sometimes we just need more data
 
 - Areas of exploration
 
   * Size structure
 
   * Ecosystem drivers
-
-  * Extensions to pink salmon
 
 
 ].pull-right[
@@ -427,7 +424,9 @@ Can non-parametric models improve sockeye forecasts? Somewhat.
 
 .pull-left[
 
-- Both **why** and **what will** have roles to play in managing social-ecological systems
+Both **why** and **what will** have roles to play in managing social-ecological systems
+
+Areas of research: 
 
 - Benchmark forecasts?
 
@@ -494,7 +493,7 @@ class: center, top, inverse
 ---
 
 
-# MPAs - The Evidence
+# Marine Protected Areas - The Evidence
 
 
 
@@ -511,14 +510,14 @@ class: center, top, inverse
 
 ---
 
-# MPAs - The Evidence
+# Marine Protected Areas - The Evidence
 
 .pull-left[
 
-- MPAs seem simple: 
+- Protected areas seem simple: 
   - *Less fishing, more fish*
 
-- Ample evidence of **more everything** inside MPAs than outside
+- Ample evidence of **more everything** inside protected areas than outside
 
 - Problem solved?
 
@@ -571,12 +570,21 @@ Relatively sedentary adults, widely dispersed larvae with post-settlement densit
 
 
 
-# Case Study: Channel Islands MPAs
+# Case Study: Channel Islands Marine Protected Areas
 
-.center[![:scale 80%](`r file.path(img_path,"ci.png")`)]
+.center[![:scale 80%](imgs/ci.png)]
+
+---
+
+# Case Study: Channel Islands Marine Protected Areas
+
+
+.center[![:scale 80%](imgs/diving.JPG)]
 
 
 ---
+
+
 
 # What Happend in the Channel Islands?
 
@@ -668,7 +676,7 @@ $$\mathbf{B^s} \sim N(\beta_r,\sigma_r)$$
 
 - Communities should have a clear understanding of expected effects of protected areas
 
-- What about the social effects?
+- What about the social outcomes?
 
 
 ].pull-right[
@@ -729,6 +737,8 @@ New computational and data resources are opening frontiers in environmental scie
 ### Research at UCSD
 
 - Tools and best practices in environmental data science
+  - Injecting structure
+  - Uncertainty
 
 - Collaborations bridging **data** and **marine** sciences
   - CALCOFI
@@ -743,12 +753,13 @@ New computational and data resources are opening frontiers in environmental scie
 ]
 
 ???
+a pdp-11
+
 Collaborating with other faculty and institutions to help them make the most of their data
 Atlantis
 
 What we do matters but so does how we do it. 
 
-a pdp-11
 Global weirding in Alaska
 
 ---
